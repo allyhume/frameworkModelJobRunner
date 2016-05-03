@@ -1,0 +1,65 @@
+#!/bin/sh
+
+# Runs the Matlab Framework model simulation.  The inputs to this
+# script at the various light, temperature and CO2 inputs to the
+# simulation.
+
+
+JOBS_DIR=../jobs
+
+# Job id comes from command line
+JOB_ID=$1
+
+LIGHT_MAX=$2
+LIGHT_MIN=$3
+LIGHT_ON=$4
+LIGHT_OFF=$5
+LIGHT_TWILIGHT=$6
+
+TEMP_MAX=$7
+TEMP_MIN=$8
+TEMP_ON=$9
+TEMP_OFF=${10}
+TEMP_TWILIGHT=${11}
+
+CO2_MAX=${12}
+CO2_MIN=${13}
+CO2_ON=${14}
+CO2_OFF=${15}
+CO2_TWILIGHT=${16}
+
+# Job directory
+JOB_DIR=$JOBS_DIR/$JOB_ID
+mkdir $JOB_DIR
+
+# Copy the required files to the job directory
+PARAM_FILE=$JOB_DIR/jobParams.m
+echo "tempMin=$TEMP_MIN"               >> $PARAM_FILE
+echo "tempMax=$TEMP_MAX"               >> $PARAM_FILE
+echo "tempOn=$TEMP_ON"                 >> $PARAM_FILE
+echo "tempOff=$TEMP_OFF"               >> $PARAM_FILE
+echo "tempTwilight=$TEMP_TWILIGHT"     >> $PARAM_FILE
+
+echo "co2Min=$CO2_MIN"                 >> $PARAM_FILE
+echo "co2Max=$CO2_MAX"                 >> $PARAM_FILE
+echo "co2On=$CO2_ON"                   >> $PARAM_FILE
+echo "co2Off=$CO2_OFF"                 >> $PARAM_FILE
+echo "co2Twilight=$CO2_TWILIGHT"       >> $PARAM_FILE
+
+echo "lightMin=$LIGHT_MIN"             >> $PARAM_FILE
+echo "lightMax=$LIGHT_MAX"             >> $PARAM_FILE
+echo "lightOn=$LIGHT_ON"               >> $PARAM_FILE
+echo "lightOff=$LIGHT_OFF"             >> $PARAM_FILE
+echo "lightTwilight=$LIGHT_TWILIGHT"   >> $PARAM_FILE
+
+cat template.m >> $PARAM_FILE
+
+# Run the simulation
+cd $JOB_DIR
+/Applications/MATLAB_R2015b.app/bin/matlab  -nodesktop -nosplash -r "jobParams;exit"
+
+# Wait for a while and then delete the directory - the application should pull it back quickly
+# so there is no need to keep the data for very long.
+sleep 120
+cd ..
+rm -r $JOB_DIR
