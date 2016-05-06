@@ -4,6 +4,7 @@
 # script at the various light, temperature and CO2 inputs to the
 # simulation.
 
+MATLAB_EXE=matlab
 
 JOBS_DIR=../jobs
 
@@ -50,7 +51,7 @@ cat template.m >> $PARAM_FILE
 
 # Run the simulation
 cd $JOB_DIR
-/Applications/MATLAB_R2015b.app/bin/matlab  -nodesktop -nosplash -r "jobParams;exit"
+${MATLAB_EXE}  -nodesktop -nosplash -r "jobParams;exit"
 
 # Wait for a while and then delete the directory - the application should pull it back quickly
 # so there is no need to keep the data for very long.
