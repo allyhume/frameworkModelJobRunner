@@ -1,4 +1,5 @@
 resultFileName = 'myResultFile.csv';
 addpath('../../frameworkmodel');
 addpath('../../frameworkmodel/PIF_CO_FT_model')
-run_simulation(resultFileName,tempMin,tempMax,tempOn,tempOff,tempTwilight,co2Min,co2Max,co2On,co2Off,co2Twilight,lightMin,lightMax,lightOn,lightOff,lightTwilight)
+run_simulation(resultFileName,tempDay,tempNight,tempDayLength,tempTwilight,co2Day,co2Night,co2DayLength,co2Twilight,lightDay,lightNight,lightDayLength,lightTwilight)
+
