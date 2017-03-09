@@ -6,7 +6,7 @@
 
 MATLAB_EXE=matlab
 
-JOBS_DIR=../jobs
+JOBS_DIR=../jobs_dev
 
 # Job id comes from command line
 JOB_ID=$1
@@ -25,6 +25,8 @@ CO2_DAY=${10}
 CO2_NIGHT=${11}
 CO2_DAY_LENGTH=${12}
 CO2_TWILIGHT=${13}
+
+CLOCK_GENOTYPE=${14}
 
 # Job directory
 JOB_DIR=$JOBS_DIR/$JOB_ID
@@ -46,6 +48,7 @@ echo "lightDay=$LIGHT_DAY"               >> $PARAM_FILE
 echo "lightNight=$LIGHT_NIGHT"           >> $PARAM_FILE
 echo "lightDayLength=$LIGHT_DAY_LENGTH"  >> $PARAM_FILE
 echo "lightTwilight=$LIGHT_TWILIGHT"     >> $PARAM_FILE
+echo "clockGenotype='$CLOCK_GENOTYPE'"   >> $PARAM_FILE
 
 cat template.m >> $PARAM_FILE
 
