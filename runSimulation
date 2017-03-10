@@ -6,7 +6,7 @@
 
 MATLAB_EXE=matlab
 
-JOBS_DIR=../jobs_dev
+JOBS_DIR=../jobs
 
 # Job id comes from command line
 JOB_ID=$1
